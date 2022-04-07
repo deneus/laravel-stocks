@@ -8,7 +8,7 @@
     <div class="row">
 
         @foreach($products as $product)
-            <form class="d-inline-block col-3">
+            <form class="d-inline-block col-3" method="POST" action="{{ route('add_to_cart') }}">
                 @csrf
                 <div class="card bg-light m-3 p-3">
                     <div class="card-body text-center">
@@ -17,7 +17,7 @@
                         <p class="card-text text-wrap">{{ $product->description }}</p>
                         <p class="card-text text-wrap">quantity: {{ $product->quantity }}</p>
                         <div><input type="submit" value="Add to cart" /></div>
-                        <input type="text" value="{{ $product }}" name="product" />
+                        <input type="text" value="{{ $product }}" name="item" />
                     </div>
                 </div>
             </form>

@@ -20,8 +20,19 @@
         @yield('content')
     </div>
     <div class="col-3">
-        <div class="card row bg-info m-3">
-            fdgfdg
+        <div class="container card bg-info mt-3 px-4 text-white">
+            <h1 class="text-center pt-3">Current Cart</h1>
+            @for($i=0; $i<5; $i++ )
+                <div class="row border-bottom border-white border-1 py-3">
+                    <div class="col-7">item {{$i}}</div>
+                    <div class="col-2">x 1</div>
+                    <div class="col-3 text-end">10.00$</div>
+                </div>
+            @endfor
+                <div class="row py-3">
+                    <h2 class="col-7">TOTAL</h2>
+                    <h2 class="col-5 text-end">10.00$</h2>
+                </div>
         </div>
     </div>
 </div>
