@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * Model product
  *
+ * @property integer $id
  * @property string $title
  * @property string $description
  * @property int $quantity

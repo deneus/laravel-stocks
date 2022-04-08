@@ -15,8 +15,14 @@ class SubCategoryController extends Controller
             ->where('subcategory_id', $subcategory->id)
             ->where('quantity', '>', 0);
 
+        $productsOutOfStock = Product::all()
+            ->where('subcategory_id', $subcategory->id)
+            ->where('quantity', 0);
+
         return view('sub_category', [
             'products' => $products,
+            'product_out_of_stock' => $productsOutOfStock,
+            'category' => $subcategory->category()[0],
         ]);
     }
 }

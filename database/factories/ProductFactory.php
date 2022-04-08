@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'title' => $faker->word(),
             'description' => $faker->sentence(),
             'quantity' => rand(0, 10),
-            'price' => rand( 0, 1) * 100,
+            'price' => rand( 0, 100),
             'path' => 'products/default.png',
             'subcategory_id' => Subcategory::all()->shuffle()->first()->id,
         ];

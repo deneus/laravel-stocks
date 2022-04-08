@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    @include('partials.back', ['href' =>  route('home') ])
+
     <div class="row">
         @foreach($sub_categories as $sub_category)
             <a href="{{ route('sub_category', ['subcategory' => $sub_category]) }}" class="d-inline-block col-3">

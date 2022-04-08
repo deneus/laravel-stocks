@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AddToCartController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubCategoryController;
@@ -26,5 +26,8 @@ Route::get('/category/{category:id}', [CategoryController::class, 'displayCatego
 Route::get('/subcategory/{subcategory:id}', [SubCategoryController::class, 'displaySubCategory'])
     ->name('sub_category');
 
-Route::post('/add-to-cart', [AddToCartController::class, 'processPost'])
+Route::get('/cart', [CartController::class, 'displayCart'])
+    ->name('cart');
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])
     ->name('add_to_cart');
