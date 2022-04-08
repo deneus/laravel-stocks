@@ -27,6 +27,7 @@ class CartProductsSeeder extends Seeder
                     ->create([
                         'cart_id' => $cart->id,
                         'product_id' => $product->id,
+                        'quantity' => rand(0,5),
                 ]);
             }
         }

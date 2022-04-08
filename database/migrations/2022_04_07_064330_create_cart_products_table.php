@@ -19,6 +19,8 @@ class CreateCartProductsTable extends Migration
             $table->id();
             $table->foreignIdFor(Cart::class)->constrained();
             $table->foreignIdFor(Product::class)->constrained();
+            $table->integer('quantity')
+                ->default(0);
             $table->timestamps();
         });
     }

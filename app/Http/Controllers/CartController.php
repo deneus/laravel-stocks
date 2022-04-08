@@ -6,9 +6,6 @@ use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
-use phpDocumentor\Reflection\Types\Integer;
 
 class CartController extends Controller
 {
@@ -44,7 +41,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function addToCart(Request $request) {
+    public static function addToCart(Request $request) {
         $cart = self::getCurrentCart();
         $product = self::getSubmittedProduct($request);
 
@@ -65,7 +62,7 @@ class CartController extends Controller
             ->create([
                 'cart_id' => $cart->id,
                 'product_id' => $product->id,
-                // 'quantity' => 1,
+                'quantity' => 1,
             ]);
     }
 

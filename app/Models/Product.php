@@ -33,7 +33,7 @@ class Product extends Model
     /*
      * Get the subcategory that owns the product.
      */
-    public function subcategory(): BelongsTo {
-        return $this->belongsTo(Subcategory::class);
+    public function subcategory(): Subcategory {
+        return $this->belongsTo(Subcategory::class)->get()[0];
     }
 }
