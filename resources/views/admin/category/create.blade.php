@@ -1,7 +1,7 @@
 @extends('partials.html_admin')
 
 @section('page_title')
-    List of categories
+    Create a category
 @endsection
 
 @section('content')

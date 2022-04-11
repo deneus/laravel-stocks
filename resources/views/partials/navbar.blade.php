@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="{{ route('home') }}">Admin Home
+                    <a class="nav-link active" href="{{ route('home') }}">Admin
                     </a>
                 </li>
 {{--                <li class="nav-item">--}}

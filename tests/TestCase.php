@@ -35,6 +35,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     protected function createSubCategory(): Subcategory {
+        $this->createCategory();
         return Subcategory::factory()
             ->count(1)
             ->create()

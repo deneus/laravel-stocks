@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminSubCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SubCategoryController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,5 +51,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::prefix('admin')->group(function() {
         Route::resource('categories', AdminCategoryController::class);
+        Route::resource('sub_categories', AdminSubCategoryController::class);
     });
+
 });

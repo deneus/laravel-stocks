@@ -28,8 +28,11 @@ class Subcategory extends Model
     /*
      * Get the subcategory that owns the product.
      */
-    public function category(): Collection {
-        return $this->belongsTo(Category::class)->get();
+    /**
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\BelongsTo|object|null
+     */
+    public function category(): Category {
+        return $this->belongsTo(Category::class, 'category_id')->first();
     }
 
     public function products(): Collection {

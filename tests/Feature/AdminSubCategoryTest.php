@@ -3,18 +3,18 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
-use App\Models\User;
+use App\Models\Subcategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class AdminCategoryTest extends TestCase
+class AdminSubCategoryTest extends TestCase
 {
 
     use DatabaseMigrations;
 
     public function test_middleware()
     {
-        $response = $this->get(route('categories.index'));
+        $response = $this->get(route('sub_categories.index'));
         $response->assertStatus(302);
 
     }
@@ -22,69 +22,72 @@ class AdminCategoryTest extends TestCase
     public function test_index()
     {
         $this->beAdmin();
-        $response = $this->get(route('categories.index'));
+        $response = $this->get(route('sub_categories.index'));
         $response->assertStatus(200);
     }
 
     public function test_create()
     {
         $this->beAdmin();
-        $response = $this->get(route('categories.create'));
+        $response = $this->get(route('sub_categories.create'));
         $response->assertStatus(200);
     }
 
     public function test_store()
     {
         $this->beAdmin();
-        $response = $this->post(route('categories.store'),[
+        $category = $this->createCategory();
+        $response = $this->post(route('sub_categories.store'),[
             '_token' => csrf_token(),
             'icon' => 'fa-solid fa-bomb',
             'label' => 'valid test',
+            'category_id' => $category->id,
         ]);
         $this->assertEquals(302, $response->getStatusCode());
 
-        $categories = Category::all();
+        $categories = SubCategory::all();
         $this->assertCount(1, $categories);
     }
 
     public function test_edit()
     {
         $this->beAdmin();
-        $category = $this->createCategory();
-
-        $response = $this->get(route('categories.edit', ['category' => $category->id]));
+        $sub_category = $this->createSubCategory();
+//dd($sub_category);
+        $response = $this->get(route('sub_categories.edit', ['sub_category' => $sub_category->id]));
         $response->assertStatus(200);
     }
 
     public function test_update()
     {
         $this->beAdmin();
-        $category = $this->createCategory();
+        $sub_category = $this->createSubCategory();
 
         $value = 'valid test';
-        $response = $this->put(route('categories.update', ['category' => $category->id]),[
+        $response = $this->put(route('sub_categories.update', ['sub_category' => $sub_category->id]),[
             '_token' => csrf_token(),
-            'icon' => $category->icon,
+            'icon' => $sub_category->icon,
+            'category_id' => $sub_category->id,
             'label' => $value,
         ]);
 
         $response->assertStatus(302);
 
-        $category = Category::all()->last();
-        $this->assertEquals($value, $category->label);
+        $sub_category = SubCategory::all()->last();
+        $this->assertEquals($value, $sub_category->label);
     }
 
     public function test_delete()
     {
         $this->beAdmin();
-        $category = $this->createCategory();
+        $sub_category = $this->createSubCategory();
 
-        $response = $this->delete(route('categories.destroy', ['category' => $category]),[
+        $response = $this->delete(route('sub_categories.destroy', ['sub_category' => $sub_category]),[
             '_token' => csrf_token(),
         ]);
         $response->assertStatus(302);
 
-        $categories = Category::all();
-        $this->assertCount(0, $categories);
+        $sub_categories = Subcategory::all();
+        $this->assertCount(0, $sub_categories);
     }
 }

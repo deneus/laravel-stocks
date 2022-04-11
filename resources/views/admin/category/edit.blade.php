@@ -1,7 +1,7 @@
 @extends('partials.html_admin')
 
 @section('page_title')
-    List of categories
+    Edit a categories ({{ $category->id }})
 @endsection
 
 @section('content')

@@ -7,6 +7,16 @@ use App\Models\Category;
 
 class AdminCategoryController extends Controller
 {
+
+    /**
+     * Redirect to category index page.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    private static function returnToCategoryIndex() {
+        return redirect(route('categories.index' , ['categories' => Category::all()]));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +44,7 @@ class AdminCategoryController extends Controller
      *
      * @param \App\Http\Requests\AdminCategoryRequest $request
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application
      */
     public function store(AdminCategoryRequest $request)
     {
@@ -64,7 +74,7 @@ class AdminCategoryController extends Controller
      * @param \App\Http\Requests\AdminCategoryRequest $request
      * @param \App\Models\Category $category
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application
      */
     public function update(AdminCategoryRequest $request, Category $category)
     {
@@ -80,7 +90,7 @@ class AdminCategoryController extends Controller
      *
      * @param \App\Models\Category $category
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application
      */
     public function destroy(Category $category)
     {
@@ -98,7 +108,4 @@ class AdminCategoryController extends Controller
         return self::returnToCategoryIndex();
     }
 
-    private static function returnToCategoryIndex() {
-        return redirect(route('categories.index' , ['categories' => Category::all()]));
-    }
 }
