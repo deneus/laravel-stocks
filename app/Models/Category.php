@@ -20,4 +20,8 @@ class Category extends Model
         'label',
         'icon',
     ];
+
+    public function subCategories(): iterable {
+        return $this->hasMany(Subcategory::class)->get();
+    }
 }

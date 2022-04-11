@@ -21,15 +21,10 @@ class SubCategoryPageTest extends TestCase
      */
     public function test_sub_category_page()
     {
-        $category = Category::factory()
-            ->count(1)
-            ->create();
+        $this->createCategory();
+        $sub_category = $this->createSubCategory();
 
-        $sub_category = Subcategory::factory()
-            ->count(1)
-            ->create();
-
-        $response = $this->get('/subcategory/' . $sub_category->first()->category_id);
+        $response = $this->get('/subcategory/' . $sub_category->category_id);
 
         $response->assertStatus(200);
         $response->assertSeeText(SubCategoryController::PAGE_TITLE);

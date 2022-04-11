@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', [HomeController::class, 'displayHome'])
-    ->name('home');
+    ->name('/');
 
 Route::get('/category/{category:id}', [CategoryController::class, 'displayCategory'])
     ->name('category');
@@ -31,3 +38,18 @@ Route::get('/cart', [CartController::class, 'displayCart'])
 
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])
     ->name('add_to_cart');
+
+Route::get('/admin', [AdminController::class, 'home'])
+    ->name('home')
+    ->middleware('auth');
+
+Route::group(['middleware' => ['auth']], function() {
+    /**
+     * Logout Route
+     */
+    Route::get('/logout',  [LogoutController::class, 'perform'] )->name('logout.perform');
+
+    Route::prefix('admin')->group(function() {
+        Route::resource('categories', AdminCategoryController::class);
+    });
+});

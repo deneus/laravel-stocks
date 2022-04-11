@@ -20,10 +20,8 @@ class CategoryPageTest extends TestCase
     public function test_category_page()
     {
 
-        $category = Category::factory()
-            ->count(1)
-            ->create();
-        $response = $this->get('/category/' . $category->first()->id);
+        $category = $this->createCategory();
+        $response = $this->get('/category/' . $category->id);
 
         $response->assertStatus(200);
         $response->assertSeeText(CategoryController::PAGE_TITLE);
